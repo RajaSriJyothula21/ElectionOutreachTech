@@ -1,4 +1,5 @@
 require("dotenv").config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -14,16 +15,24 @@ const exportRoutes = require("./routes/exportRoutes");
 const analyticsRoutes = require("./routes/analyticsRoutes");
 const historyRoutes = require("./routes/historyRoutes");
 const summaryRoutes = require("./routes/summaryRoutes");
-const dns = require("dns")
-dns.setServers([
-  '1.1.1.1',
-  '8.8.8.8'
-])
+const dns = require("dns");
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
 app.use(express.json());
+const fs = require("fs");
+dns.setServers([
+  '1.1.1.1',
+  '8.8.8.8'
+])
+// Ensure required directories exist
+const requiredDirs = ["uploads", "public/audio"];
+requiredDirs.forEach((dir) => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+});
 
 // Serve generated audio files
 app.use("/audio", express.static("public/audio"));

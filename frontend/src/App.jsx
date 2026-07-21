@@ -5,7 +5,7 @@ import Upload from "./pages/Upload";
 import Contacts from "./pages/Contacts";
 import Responses from "./pages/Responses";
 import Reports from "./pages/Reports";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/NavBar";
 import Sidebar from "./components/Sidebar";
 import History from "./pages/History";
 function App() {
